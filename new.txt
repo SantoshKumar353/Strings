@@ -1,0 +1,36 @@
+http://localhost:8888/notebooks/ML%20LAB/K%20FREQUENT.ipynb
+
+
+import random
+import csv
+attributes=[['Sunny','Rainy'],
+            ['Warm','Cold'],
+            ['Normal','High'],
+            ['Strong','Weak'],
+            ['Same','Change']]
+num_attributes=len(attributes)
+print("\n the most general hypothesis:['?','?','?','?','?','?']\n")
+print("\n the most specific hypothesis:['0','0','0','0','0','0']\n")
+a=[]
+print("\n the Given Training Data set: \n")
+with open('wv.csv','r') as csvfile:
+    reader=csv.reader(csvfile)
+    for row in reader:
+        a.append(row)
+        print(row)
+print("\n the initial value of hypothesis: ")
+hypothesis =['0'] * num_attributes
+print(hypothesis)
+for j in range(0,num_attributes):
+    hypothesis[j]=a[0][j]
+print("\n Find S: Finding a Maximally Specific Hypothesis\n")
+for i in range(0,len(a)):
+    if a[i][num_attributes]=='Yes':
+        for j in range(0,num_attributes):
+            if a[i][j]!=hypothesis[j]:
+                hypothesis[j]='?'
+            else:
+                hypothesis[j]=a[i][j]
+    print(" For Training Example No:{0} the hypothesis is".format(i),hypothesis)
+print("\n The Maximally Specific Hypothesis for a given TrainingExamples :\n")
+print(hypothesis)
